@@ -1,0 +1,40 @@
+<ion-view class="category-feeds-view">
+  <ion-nav-buttons side="right">
+    <img class="logo-on-top" src="img/barbo.svg" />
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <span class="header-text">{{venue.strName}}</span>
+  </ion-nav-title>
+  <ion-content>
+    <div class="venue-details item-thumbnail-left">
+      <img class="glow-img" ng-src="{{venue.strLogo}}">
+      <h2>{{venue.strName}}</span></h2>
+      <p>{{venue.strAddress}}</p>
+      <p>{{venue.intCity}}, {{venue.strState}}</p>
+      <br>
+      <p ng-if="venue.strPhone!='NULL'">{{venue.strPhone}}</p>
+    </div>
+    <br>
+    <div class="weekly-specials">
+      <div class="heading">Going on now</div>
+      <br>
+      <div class="content">
+        <ion-slide-box show-pager="false" does-continue="true" auto-play="true">
+          <ion-slide ng-repeat="i in [1,2,3,4,5,6,7]">
+            <div class="item-icon-left item-icon-right">
+              <h3>{{day(i)}}</h3>
+              <i class="button button-icon back-button" ng-click="prevSlide()"></i>
+              <p ng-bind-html="specials_for_day(i)"></p>
+              <i class="button button-icon fwd-button" ng-click="nextSlide()"></i>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+    </div>
+    <br>
+    <div class="weekly-specials">
+      <div class="heading">Special Events</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

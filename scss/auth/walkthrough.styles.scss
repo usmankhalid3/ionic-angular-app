@@ -1,0 +1,144 @@
+.walkthrough-view
+{
+	.page-content {
+
+		.logo {
+			//box-shadow: 3px 5px 3.8px 0.2px #000000;
+			position: absolute;
+			width: 40%;
+			height: 40%;
+  			left: 33%;
+			top: 3%;
+		}
+
+		.btn-facebook {
+			position: absolute;
+			left: 8%;
+			top: 42%;
+			width: 85%;
+			height: 22%;
+			background: url('../img/btn-facebook.png') no-repeat;
+			background-size: contain;
+		}
+
+		.btn-facebook:active {
+			background: url('../img/btn-facebook-active.png') no-repeat;
+			background-size: contain;
+		}
+
+		.login-form {
+
+			height: 100%;
+
+			.separator {
+				background: url('../img/login-backend.png') no-repeat;
+				background-size: contain;
+				position: absolute;
+				left: 0%;
+				top: 50%;
+				width: 100%;
+				height: 100%;
+				z-index: -1;
+			}
+
+			.field-bg {
+				width: 82%;
+				height: 23.5%;
+				position: absolute;
+				left: 12%;
+			}
+
+			.uname-bg {
+				@extend .field-bg;
+				top: 117%;
+			}
+
+			.pwd-bg {
+				@extend .field-bg;
+				top: 162%;
+			}
+
+
+			.form-content {
+				position: absolute;
+				left: 13%;
+			}
+
+			.label {
+				@extend .form-content;
+				width: 25%;
+				height: 1.8%;
+				color: #ddd;
+				font-size: 15px;
+			}
+
+			.input-field {
+				@extend .form-content;
+				width: 80%;
+				height: 20%;
+			}
+
+			.uname-label {
+				@extend .label;
+				top: 103%;
+			}
+
+			.pwd-label {
+				@extend .label;
+				top: 148%;
+			}
+			
+			.uname-field {
+				@extend .input-field;
+				top: 118%;
+			}
+
+			.pwd-field {
+				@extend .input-field;
+				top: 164%;
+			}
+
+			.btn-img {
+				position: absolute;
+				top: 86%;
+				width: 35%;
+				height: 100%;
+			}
+
+			.btn-signin {
+				@extend .btn-img;
+				left: 18%;
+				background: url('../img/signin.png') no-repeat;
+				background-size: contain;
+			}
+
+			.btn-signin:active {
+				background: url('../img/signin-active.png') no-repeat;
+				background-size: contain;
+			}
+
+			.btn-register {
+				@extend .btn-img;
+				left: 54%;
+				background: url('../img/register.png') no-repeat;
+				background-size: contain;
+			}
+
+			.btn-register:active {
+				background: url('../img/register-active.png') no-repeat;
+				background-size: contain;
+			}
+
+			.forgot-pwd {
+				position: absolute;
+				width: 50%;
+				left: 62%;
+				top: 93%;
+				color: #ddd;
+				font-size: 12px;
+				text-decoration: none;
+			}
+		}
+	}
+
+}

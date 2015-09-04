@@ -1,0 +1,25 @@
+<ion-view class="feeds-categories-view">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <img class="logo-on-top" src="img/barbo.svg" />
+  </ion-nav-buttons>
+  <ion-nav-title>
+    <img src="img/barbotext.svg" class="header-text"/>
+  </ion-nav-title>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="category in feeds_categories"
+            class="item-thumbnail-left item-icon-right feed"
+            ui-sref="app.category-feeds({categoryId: ($index | slugify)})">
+        <img class="glow-img" ng-src="{{category.strLogo}}">
+        <h2>{{category.strName}}</span></h2>
+        <p ng-bind-html="todays_specials(category.arraySpecials)"></p>
+        <br>
+        <p><small>{{category.intDistance}} Miles</small></p>
+        <i class="button button-icon fwd-button"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

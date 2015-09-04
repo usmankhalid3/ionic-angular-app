@@ -1,0 +1,172 @@
+@font-face {
+	font-family:"Lobster_1_4";
+	src:url("../fonts/Lobster_1_4/Lobster_1_4.eot?") format("eot"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.woff") format("woff"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.ttf") format("truetype"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.svg#Lobster1.4") format("svg");
+	font-weight:normal;
+	font-style:normal;
+}
+
+@font-face {
+	font-family: 'Myriad Pro';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Myriad Pro'), url('../fonts/MyriadPro/MYRIADPRO-REGULAR.woff') format('woff');
+}
+
+
+.category-feeds-view
+{
+	.item-complex .item-content, .item-radio .item-content {
+		background-color: rgba(0, 0, 0, 0);
+	}
+
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0%;
+	top: 0%;
+	background: url('../img/background-list.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	z-index: -1;
+
+	.page-item {
+		background-color: rgba(255, 255, 255, 0);
+		background: -webkit-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -moz-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -o-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -ms-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: linear-gradient(0deg, #2e3d47 0%, #061824 100%);
+
+  		border-image: url('../img/item-border.png') 100 100 100 100 repeat stretch;
+
+		opacity: 0.85;
+
+		p, p span {
+			font-family: Arial;
+			color:  #ffffff;
+			font-size: 15px;
+			font-weight: 400;
+			text-align: left;
+			text-shadow: 0px 3px 0px rgba(0, 0, 0, 0.35);
+		}
+
+	}
+
+	.venue-details {
+
+		@extend .page-item;
+
+		border-width: 0px 0px 1px 0px;
+
+		h2 {
+			font-family: 'Myriad Pro';
+			color:  #f0cd54;
+			font-size: 24px;
+			font-weight: 700;
+			text-align: left;
+			text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
+		}
+
+	}
+
+	.heading {
+		font-family: "Lobster_1_4";
+		color:  #ffffff;
+		font-size: 30px;
+		font-weight: 400;
+		text-align: left;
+		padding-left: 10px;
+		text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.75);
+	}
+
+	.weekly-specials {
+
+		.content {
+			@extend .page-item;
+
+			border-width: 1px 0px 1px 0px;
+
+			.slider {
+				padding-bottom: 10px;
+			}
+			
+			.slider-pager {
+				top: initial;
+				bottom: 10px;
+			}
+
+			.item p {
+				color: white;
+			}
+
+			.item {
+				background-color: rgba(255, 255, 255, 0);
+			}
+
+			h3 {
+				font-family: Arial;
+				color:  #f5d379;
+				font-size: 20px;
+				font-weight: 400;
+				text-align: center;
+				text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.75);
+			}
+		}
+	}
+
+	.special-events {
+
+	}
+
+	.glow-img {
+
+		border: 1px solid #000;
+
+		// for glowing
+		-webkit-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		-moz-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		box-shadow: 0 0 30px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+
+		// for round edges
+		-webkit-border-radius: 20px;
+		-moz-border-radius: 20px;
+		border-radius: 5px;
+	}
+
+	.browse-button {
+		position: absolute;
+		top: 50%;
+		width: 10%;
+		height: 100%;
+	}
+
+	.fwd-button {
+		@extend .browse-button;
+		right: 1%;
+		background: url('../img/fwd-arrow.png') no-repeat;
+	}
+
+	.back-button {
+		@extend .browse-button;
+		left: 1%;
+		background: url('../img/back-arrow.png') no-repeat;
+	}
+}
+
+.bar.app-top-bar {
+	background: url('../img/header.png') no-repeat;
+	background-size: cover;
+	height: 7.5%;
+}
+
+.header-text {
+	font-family: Lobster_1_4;
+	color:  #ffffff;
+	font-size: 30px;
+	font-weight: 700;
+	text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.75);
+}

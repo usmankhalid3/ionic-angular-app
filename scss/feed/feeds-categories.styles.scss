@@ -1,0 +1,113 @@
+@font-face {
+	font-family: 'Myriad Pro';
+	font-style: normal;
+	font-weight: normal;
+	src: local('Myriad Pro'), url('../fonts/MyriadPro/MYRIADPRO-REGULAR.woff') format('woff');
+}
+
+.feeds-categories-view
+{
+
+	.item-complex .item-content, .item-radio .item-content {
+		background-color: rgba(0, 0, 0, 0);
+	}
+
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	left: 0%;
+	top: 0%;
+	background: url('../img/background-list.png') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	z-index: -1;
+
+	.glow-img {
+
+		border: 1px solid #000;
+
+		// for glowing
+		-webkit-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		-moz-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		box-shadow: 0 0 30px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+
+		// for round edges
+		-webkit-border-radius: 20px;
+		-moz-border-radius: 20px;
+		border-radius: 5px;
+	}
+
+	ion-item {
+		background-color: rgba(255, 255, 255, 0);
+		//color: white;
+		//border-bottom: 1px solid #fff;
+
+		//border-radius: 10px;
+		background: -webkit-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -moz-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -o-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: -ms-linear-gradient(90deg, #2e3d47 0%, #061824 100%);
+		background: linear-gradient(0deg, #2e3d47 0%, #061824 100%);
+
+		border-width: 0px 0px 2px 0px;
+  		border-image: url('../img/item-border.png') 100 100 100 100 repeat stretch;
+
+		opacity: 0.85;
+
+		h2 {
+			font-family: 'Myriad Pro';
+			color:  #f0cd54;
+			font-size: 24px;
+			font-weight: 700;
+			text-align: left;
+			text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
+		}
+
+		p, p span {
+			font-family: 'Myriad Pro';
+			color:  #ffffff;
+			font-size: 16px;
+			font-weight: 400;
+			text-align: left;
+			text-shadow: 0px 2px 0px rgba(11, 11, 11, 0.71);
+		}
+
+		p small {
+			font-family: 'Myriad Pro';
+			color: #f0cd54;
+			font-size: 18px;
+			font-weight: 700;
+			text-align: left;
+			text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
+		}
+
+	}
+
+	.fwd-button {
+		position: absolute;
+		top: 40%;
+		right: 1%;
+		width: 7%;
+		background: url('../img/fwd-arrow.png') no-repeat;
+	}
+
+}
+
+.logo-on-top {
+	position: absolute;
+	width: 55px;
+	right: -5px;
+	top: -28px;
+}
+
+.bar.app-top-bar {
+  background: url('../img/header.png') no-repeat;
+  background-size: cover;
+  height: 7.5%;
+}
+
+.header-text {
+	//box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.51);
+	width: 47%;
+}
