@@ -200,8 +200,9 @@ angular.module('your_app_name.controllers', [])
 
 	$scope.todays_specials = function(specials) {
 		var d = new Date();
-		var today = d.getDay();
-		var specialsStr = specials[today][today+1];
+		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
+		console.log("DAY " + today);
+		var specialsStr = specials[today-1][today];
 		if (specialsStr === null || specialsStr.length <= 0) {
 			specialsStr = "<span style='font-style:italic'>No specials today</span>";
 		}
@@ -219,10 +220,16 @@ angular.module('your_app_name.controllers', [])
 	$scope.events =  {};
 	$scope.venue = {};
 
-	var categoryId = 0;//$stateParams.categoryId;
+	var categoryId = $stateParams.categoryId;
 	var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 	console.log("CATEGORY_ID: " + categoryId);
+
+	$scope.today = function() {
+		var d = new Date();
+		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
+		return today;
+	};
 
 	$scope.nextSlide = function() {
     	$ionicSlideBoxDelegate.next();
@@ -232,14 +239,13 @@ angular.module('your_app_name.controllers', [])
     	$ionicSlideBoxDelegate.previous();
   	};
 
-	$scope.day = function(index) {
+	$scope.day_name = function(index) {
 		return days[index-1];
 	};
 
 	$scope.specials_for_day = function(day) {
 		var d = new Date();
-		var today = d.getDay();
-		console.log(JSON.stringify($scope.specials));
+		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
 		var specialsStr = $scope.specials[day];
 		if (specialsStr === null || specialsStr.length <= 0) {
 			specialsStr = "<span style='font-style:italic; text-align:center;'>No specials available</span>";

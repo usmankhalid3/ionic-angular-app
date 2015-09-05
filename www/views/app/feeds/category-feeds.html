@@ -19,10 +19,10 @@
       <div class="heading">Going on now</div>
       <br>
       <div class="content">
-        <ion-slide-box show-pager="false" does-continue="true" auto-play="true">
+        <ion-slide-box active-slide="today()-1" show-pager="false" does-continue="true" auto-play="false">
           <ion-slide ng-repeat="i in [1,2,3,4,5,6,7]">
             <div class="item-icon-left item-icon-right">
-              <h3>{{day(i)}}</h3>
+              <h3>{{day_name(i)}}</h3>
               <i class="button button-icon back-button" ng-click="prevSlide()"></i>
               <p ng-bind-html="specials_for_day(i)"></p>
               <i class="button button-icon fwd-button" ng-click="nextSlide()"></i>

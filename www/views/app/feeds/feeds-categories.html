@@ -12,7 +12,7 @@
     <ion-list>
       <ion-item ng-repeat="category in feeds_categories"
             class="item-thumbnail-left item-icon-right feed"
-            ui-sref="app.category-feeds({categoryId: ($index | slugify)})">
+            ui-sref="app.category-feeds({categoryId: $index})">
         <img class="glow-img" ng-src="{{category.strLogo}}">
         <h2>{{category.strName}}</span></h2>
         <p ng-bind-html="todays_specials(category.arraySpecials)"></p>
