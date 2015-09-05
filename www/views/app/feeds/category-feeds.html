@@ -15,9 +15,9 @@
       <p ng-if="venue.strPhone!='NULL'">{{venue.strPhone}}</p>
     </div>
     <br>
-    <div class="weekly-specials">
-      <div class="heading">Going on now</div>
-      <br>
+    <div class="heading">Going on now</div>    
+    <br>
+    <div class="specials">
       <div class="content">
         <ion-slide-box active-slide="today()-1" show-pager="false" does-continue="true" auto-play="false">
           <ion-slide ng-repeat="i in [1,2,3,4,5,6,7]">
@@ -32,8 +32,24 @@
       </div>
     </div>
     <br>
-    <div class="weekly-specials">
-      <div class="heading">Special Events</div>
+    <div class="heading">Special Events</div>    
+    <br>
+    <div class="specials">
+      <div class="content">
+        <div class="item-icon-left item-icon-right">
+          <br>
+          <p>7/4 2pm July 4th Celebration/BBQ</p>
+          <p>7/4 2pm July 4th Celebration/BBQ</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <img ng-src="img/favorites.png" class="social-btn">
+      </div>
+      <div class="col">
+        <img ng-src="img/share.png" class="social-btn">
       </div>
     </div>
   </ion-content>

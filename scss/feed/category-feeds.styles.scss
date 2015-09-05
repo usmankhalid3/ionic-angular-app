@@ -83,7 +83,7 @@
 		text-shadow: 4px 7px 8px rgba(0, 0, 0, 0.75);
 	}
 
-	.weekly-specials {
+	.specials {
 
 		.content {
 			@extend .page-item;
@@ -118,8 +118,8 @@
 		}
 	}
 
-	.special-events {
-
+	.social-btn {
+		width: 100%;
 	}
 
 	.glow-img {
