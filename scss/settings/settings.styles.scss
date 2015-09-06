@@ -1,4 +1,153 @@
+@font-face {
+	font-family:"Lobster_1_4";
+	src:url("../fonts/Lobster_1_4/Lobster_1_4.eot?") format("eot"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.woff") format("woff"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.ttf") format("truetype"),
+		url("../fonts/Lobster_1_4/Lobster_1_4.svg#Lobster1.4") format("svg");
+	font-weight:normal;
+	font-style:normal;
+}
+
 .settings-view
 {
-	background-color: $content-bg !important;
+
+	.logout-option
+	{
+		text-align: center;
+	}
+
+	.signup-form {
+		position: absolute;
+		left: 15%;
+		width: 100%;
+
+		input {
+			width: 70%;
+			border: 1px solid #000000;
+			/* round the corners */
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+
+			/* make it glow! */
+			-webkit-box-shadow: 0px 0px 10px #9ee5de;
+			-moz-box-shadow: 0px 0px 10px #9ee5de;
+			box-shadow: 0px 0px 10px #9ee5de;
+		}
+		
+		label {
+		    color: #fff;
+		}
+	}
+
+	.glow-img {
+
+		border: 1px solid #000;
+
+		// for glowing
+		-webkit-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		-moz-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		box-shadow: 0 0 30px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+
+		// for round edges
+		-webkit-border-radius: 20px;
+		-moz-border-radius: 20px;
+		border-radius: 5px;
+	}
+
+
+	.remember-me {
+		position: absolute;
+		left: 15%;
+		top: 100%;
+		input {
+			width: auto;
+		}
+	}
+
+	.settings-name {
+		font-family: "Lobster_1_4";
+		color: white;
+		margin-top: 10px;
+	}
+
+	.follow {
+		@extend .settings-name;
+		position: absolute;
+		left: 25%;
+		top: 190%;
+	}
+
+	.social-row {
+		position: absolute;
+		top: 215%;
+		width: 100%;
+
+		img {
+			height: 30px;
+			width: 30px;
+		}
+	}
+
+	.btn-img {
+		position: absolute;
+		width: 100%;
+	}
+
+	.btn-invite-fb {
+		@extend .btn-img;
+		left: 23%;
+		top: 240%;
+		height: 25%;
+		background: url('../img/invite-fb.png') no-repeat;
+		background-size: contain;
+	}
+
+	.btn-invite-fb:active {
+		background: url('../img/invite-fb-active.png') no-repeat;
+		background-size: contain;
+	}
+
+	.btn-signout {
+		@extend .btn-img;
+		left: 35%;
+		top: 273%;
+		height: 16%;		
+		background: url('../img/signout.png') no-repeat;
+		background-size: contain;
+	}
+
+	.btn-signout:active {
+		background: url('../img/signout.png') no-repeat;
+		background-size: contain;
+	}
+
+	background-color: darken($dark, 70%) !important;
+	ion-content:before
+	{
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+
+		opacity: 0.6;
+
+		display: block;
+		background: url("../img/background-list.png") no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		background-size: cover;
+
+
+	}
+}
+
+.logo-on-top {
+	position: absolute;
+	width: 55px;
+	right: -5px;
+	top: -28px;
 }

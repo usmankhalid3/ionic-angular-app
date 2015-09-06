@@ -2,49 +2,42 @@
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <img class="logo-on-top" src="img/barbo.svg" />
+  </ion-nav-buttons>
   <ion-nav-title>
-    <span>Settings</span>
+    <img src="img/barbotext.svg" class="header-text"/>
   </ion-nav-title>
   <ion-content>
-    <ul class="list">
+    <div class="text-center">
+      <br>
+      <img class="glow-img" src="../img/luke.png" width="100" />
+      <br>
+      <h3 class="settings-name">Luke Patterson</h3>
+      <span style="color:white">Austin, TX</span>
+    </div>
 
-      <div class="item item-divider">TOGGLE</div>
-
-      <ion-toggle ng-model="airplaneMode" toggle-class="toggle-assertive">Airplane Mode</ion-toggle>
-      <ion-toggle ng-model="wifi" toggle-class="toggle-positive">Wi-Fi</ion-toggle>
-      <ion-toggle ng-model="bluetooth" toggle-class="toggle-calm">Bluetooth</ion-toggle>
-      <ion-toggle ng-model="personalHotspot" toggle-class="toggle-dark">Personal Hotspot</ion-toggle>
-
-      <div class="item item-divider">CHECKBOXES</div>
-
-      <ion-checkbox ng-model="checkOpt1">Option 1</ion-checkbox>
-      <ion-checkbox ng-model="checkOpt2">Option 2</ion-checkbox>
-      <ion-checkbox ng-model="checkOpt3">Option 3</ion-checkbox>
-
-      <div class="item item-divider">RADIO</div>
-
-      <ion-radio ng-model="radioChoice" ng-value="'A'">Choose A</ion-radio>
-      <ion-radio ng-model="radioChoice" ng-value="'B'">Choose B</ion-radio>
-      <ion-radio ng-model="radioChoice" ng-value="'C'">Choose C</ion-radio>
-
-      <div class="item item-divider">RANGES</div>
-
-      <div class="range">
-        <i class="icon ion-volume-low"></i>
-        <input type="range" name="volume">
-        <i class="icon ion-volume-high"></i>
+    <form class="signup-form">
+      <label>Email</label>
+      <input type="text">
+      <br>
+      <label>Password</label>
+      <input type="password">
+      <br>
+      <label class="remember-me">
+        <input type="checkbox" />
+        Remember me on Login
+      </label>
+    </form>
+    <div class="text-center">
+      <h3 class="follow">Like and Follow us on:</h3>
+      <div class="social-row">
+        <img alt="" src="img/facebook-logo.png" class="fb"/>
+        <img alt="" src="img/instagram.png"/>
+        <img alt="" src="img/twitter.png"/>
       </div>
-      <div class="item range range-positive">
-        <i class="icon ion-ios-sunny-outline"></i>
-        <input type="range" name="volume" min="0" max="100" value="33">
-        <i class="icon ion-ios-sunny"></i>
-      </div>
-
-      <div class="item item-divider"></div>
-
-      <button class="button button-block button-assertive" ng-click="showLogOutMenu()">
-        Logout
-      </button>
-    </ul>
+      <div ui-sref="" class="btn-invite-fb"></div>
+      <div ui-sref="" class="btn-signout" ng-click="showLogOutMenu()"></div>
+    </div>
   </ion-content>
 </ion-view>

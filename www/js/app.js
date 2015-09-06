@@ -19,12 +19,12 @@ angular.module('your_app_name', [
   'your_app_name.config',
   'your_app_name.views',
   'underscore',
-  'ngMap',
   'ngResource',
   'ngCordova',
   'slugifier',
   'ionic.contrib.ui.tinderCards',
-  'youtube-embed'
+  'youtube-embed',
+  'AngularGM',
 ])
 
 .run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {

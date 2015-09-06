@@ -78,42 +78,37 @@ angular.module('your_app_name.controllers', [])
 	};
 })
 
-.controller('MapsCtrl', function($scope, $ionicLoading) {
+.controller('MapsCtrl', function($scope, $ionicLoading, $http) {
 
-	$scope.info_position = {
-		lat: 43.07493,
-		lng: -89.381388
+	$scope.venues = [];
+	$scope.center = {};
+
+	$scope.options = {
+		zoom: 15,
 	};
 
-	$scope.center_position = {
-		lat: 43.07493,
-		lng: -89.381388
+	$scope.triggerOpenInfoWindow = function(venue) {
+	    $scope.markerEvents = [
+	      {
+	        event: 'openinfowindow',
+	        ids: [venue.id]
+	      },
+	    ];
 	};
 
-	$scope.my_location = "";
-
-	$scope.$on('mapInitialized', function(event, map) {
-		$scope.map = map;
+	$http.get('feeds-categories.json').success(function(response) {
+		console.log("Loaded venues");
+		for (var i = 0; i < response.length; i++) {
+			$scope.venues.push(response[i]);
+		}
+		var lat = $scope.venues[0].intLatitude;
+		var lng = $scope.venues[0].intLongitude;
+		$scope.center = new google.maps.LatLng(lat, lng);
 	});
 
-	$scope.centerOnMe= function(){
+	google.maps.event.addListener(document.getElementById("iw-container"), 'domready', function() {
 
-		$scope.positions = [];
-
-		$ionicLoading.show({
-			template: 'Loading...'
-		});
-
-		// with this function you can get the user’s current position
-		// we use this plugin: https://github.com/apache/cordova-plugin-geolocation/
-		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-			$scope.current_position = {lat: pos.G,lng: pos.K};
-			$scope.my_location = pos.G+", "+pos.K;
-			$scope.map.setCenter(pos);
-			$ionicLoading.hide();
-		});
-	};
+	});
 })
 
 .controller('AdsCtrl', function($scope, $ionicActionSheet, AdMob, iAd) {
@@ -201,9 +196,8 @@ angular.module('your_app_name.controllers', [])
 	$scope.todays_specials = function(specials) {
 		var d = new Date();
 		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
-		console.log("DAY " + today);
 		var specialsStr = specials[today-1][today];
-		if (specialsStr === null || specialsStr.length <= 0) {
+		if (!specialsStr || specialsStr.length <= 0) {
 			specialsStr = "<span style='font-style:italic'>No specials today</span>";
 		}
 		return $sce.trustAsHtml(specialsStr);
