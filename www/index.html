@@ -22,8 +22,13 @@
     <script src="lib/ionic-contrib-tinder-cards/ionic.tdcards.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <script src="lib/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
-    <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script src="//dylanfprice.github.io/angular-gm/1.0.2/angular-gm.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <!-- Important to include gmaps api the following way because iOS sim cannot download it from the CDN -->
+    <script type="text/javascript">
+        google.load("maps", "3", {other_params: "language=de&sensor=false"});
+    </script>
+
+    <script src="lib/AngularGM/angular-gm.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
