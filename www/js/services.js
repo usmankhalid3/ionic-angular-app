@@ -1,5 +1,53 @@
 angular.module('your_app_name.services', [])
 
+.service('VenueService', function($rootScope, Venue, VENUE_API_URL, $http, $q) {
+	
+	var venues = {};
+
+	this._getAll = function(callback) {
+		$http.get(VENUE_API_URL).success(function(result) {
+			for (var i = 0; i < result.length; i++) {
+				var obj = result[i];
+				venues[obj.id] = new Venue(obj);
+			}
+			callback(venues);
+		});
+	};
+
+	this._hasData = function() {
+		return venues && Object.keys(venues).length > 0;
+	};
+
+	this.getAll = function(ignoreCache) {
+		var response = $q.defer();
+		if (!ignoreCache && this._hasData()) {
+			response.resolve(venues);
+		}
+		else {
+			this._getAll(function(result) {
+				response.resolve(venues);
+			});
+		}
+
+		return response.promise;
+	};
+
+	this.getOne = function(id, ignoreCache) {
+		var response = $q.defer();
+		if (!ignoreCache && this._hasData()) {
+			response.resolve(venues[id]);
+		}
+		else {
+			this._getAll(function(result) {
+				response.resolve(venues[id]);
+			});
+		}
+
+		return response.promise;
+	};
+})
+
+
 .service('FeedList', function ($rootScope, FeedLoader, $q){
 	this.get = function(feedSourceUrl) {
 		var response = $q.defer();

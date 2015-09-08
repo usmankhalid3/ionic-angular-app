@@ -25,9 +25,12 @@ angular.module('your_app_name', [
   'ionic.contrib.ui.tinderCards',
   'youtube-embed',
   'AngularGM',
+  'openfb',
 ])
 
-.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout) {
+.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout, APP_ID, OpenFB) {
+
+  OpenFB.init(APP_ID, "http://localhost:8100/#/feeds-categories");
 
   $ionicPlatform.on("deviceready", function(){
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

@@ -1,12 +1,37 @@
 angular.module('your_app_name.controllers', [])
 
-.controller('AuthCtrl', function($scope, $ionicConfig) {
+.controller('AuthCtrl', function($scope, $ionicConfig, OpenFB) {
 
+ 	$scope.facebookLogin = function () {
+
+		OpenFB.login('email,read_stream,publish_stream').then(
+            function () {
+                console.log("Logged in!");
+            },
+            function () {
+                alert('OpenFB login failed');
+			}
+		);
+    };
 })
 
 // APP
-.controller('AppCtrl', function($scope, $ionicConfig) {
+.controller('AppCtrl', function($scope, $ionicConfig, OpenFB) {
 
+	 $scope.logout = function () {
+            OpenFB.logout();
+            $state.go('app.login');
+     };
+
+    $scope.revokePermissions = function () {
+        OpenFB.revokePermissions().then(
+            function () {
+                $state.go('app.login');
+            },
+            function () {
+                alert('Revoke permissions failed');
+            });
+    };
 })
 
 //LOGIN
@@ -78,37 +103,56 @@ angular.module('your_app_name.controllers', [])
 	};
 })
 
-.controller('MapsCtrl', function($scope, $ionicLoading, $http) {
+.controller('MapsCtrl', function($scope, $ionicLoading, $http, VenueService) {
 
 	$scope.venues = [];
-	$scope.center = {};
+	$scope.hasData = false;
 
 	$scope.options = {
+		center: new google.maps.LatLng(0, 0),
 		zoom: 15,
 	};
 
 	$scope.triggerOpenInfoWindow = function(venue) {
+		console.log(venue.getName());
 	    $scope.markerEvents = [
 	      {
 	        event: 'openinfowindow',
-	        ids: [venue.id]
+	        ids: [venue.getId()]
 	      },
 	    ];
 	};
 
-	$http.get('feeds-categories.json').success(function(response) {
-		console.log("Loaded venues");
-		for (var i = 0; i < response.length; i++) {
-			$scope.venues.push(response[i]);
-		}
-		var lat = $scope.venues[0].intLatitude;
-		var lng = $scope.venues[0].intLongitude;
-		$scope.center = new google.maps.LatLng(lat, lng);
-	});
+	VenueService.getAll()
+		.then(
+			function(result) {
+				$scope.hasData = true;
+				for (var key in result) {
+					$scope.venues.push(result[key]);
+				}
+				$scope.venues.sort(
+					function(obj1, obj2){ 
+						return obj1.getDistance() - obj2.getDistance();
+					}
+				);
+				var lat = $scope.venues[0].getLatitude();
+				var lng = $scope.venues[0].getLongitude();
+				$scope.options.center = new google.maps.LatLng(lat, lng);
+			},
+			function(reason) {
+				console.log("Could not fetch venues: " + reason);
+			}
+		);
 
-	google.maps.event.addListener(document.getElementById("iw-container"), 'domready', function() {
+/*	$http.get('feeds-categories.json').success(function(result) {
+			for (var i = 0; i < result.length; i++) {
+					$scope.venues.push(result[i]);
+				}
+				var lat = $scope.venues[0].intLatitude;
+				var lng = $scope.venues[0].intLongitude;
+				$scope.center = new google.maps.LatLng(lat, lng);
+	});*/
 
-	});
 })
 
 .controller('AdsCtrl', function($scope, $ionicActionSheet, AdMob, iAd) {
@@ -190,40 +234,47 @@ angular.module('your_app_name.controllers', [])
 
 // FEED
 //brings all feed categories
-.controller('FeedsCategoriesCtrl', function($scope, $http, $sce) {
-	$scope.feeds_categories = [];
+.controller('FeedsCategoriesCtrl', function($scope, $http, $sce, VenueService) {
+	$scope.venues = [];
+	$scope.hasData = false;
 
-	$scope.todays_specials = function(specials) {
+	$scope.todays_specials = function(venue) {
 		var d = new Date();
 		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
-		var specialsStr = specials[today-1][today];
-		if (!specialsStr || specialsStr.length <= 0) {
+		var specialsStr = venue.getSpecialOffer(today);
+		if (!specialsStr) {
 			specialsStr = "<span style='font-style:italic'>No specials today</span>";
 		}
 		return $sce.trustAsHtml(specialsStr);
 	};
 
-	$http.get('feeds-categories.json').success(function(response) {
-		$scope.feeds_categories = response;
-	});
+	VenueService.getAll().then(
+		function(response) {
+			$scope.hasData = true;
+			for (var key in response) {
+				$scope.venues.push(response[key]);
+			}
+			$scope.venues.sort(
+				function(obj1, obj2){ 
+					return obj1.getDistance() - obj2.getDistance();
+				}
+			);
+		},
+		function(reason) {
+			console.log("Error: Could not fetch venues, reason: " + reason);
+		});
 })
 
 //bring specific category providers
-.controller('CategoryFeedsCtrl', function($scope, $http, $stateParams, $sce, $ionicSlideBoxDelegate) {
-	$scope.specials = {};
+.controller('CategoryFeedsCtrl', function($scope, $http, $stateParams, $sce, $ionicSlideBoxDelegate, VenueService) {
 	$scope.events =  {};
-	$scope.venue = {};
 
 	var categoryId = $stateParams.categoryId;
 	var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-	console.log("CATEGORY_ID: " + categoryId);
-
-	$scope.today = function() {
-		var d = new Date();
-		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
-		return today;
-	};
+	var d = new Date();
+	var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
+	$scope.today = today - 1;
 
 	$scope.nextSlide = function() {
     	$ionicSlideBoxDelegate.next();
@@ -238,31 +289,24 @@ angular.module('your_app_name.controllers', [])
 	};
 
 	$scope.specials_for_day = function(day) {
-		var d = new Date();
-		var today = d.getDay() || 7;	// convert sunday to 7, becuz thats how the API returns it
-		var specialsStr = $scope.specials[day];
-		if (specialsStr === null || specialsStr.length <= 0) {
-			specialsStr = "<span style='font-style:italic; text-align:center;'>No specials available</span>";
+		if ($scope.venue) {
+			var specialsStr = $scope.venue.getSpecialOffer(day);
+			if (specialsStr.length <= 0) {
+				specialsStr = "<span style='font-style:italic; text-align:center;'>No specials available</span>";
+			}
+			return $sce.trustAsHtml(specialsStr);
 		}
-		return $sce.trustAsHtml(specialsStr);
 	};
 
-	$http.get('feeds-categories.json').success(function(response) {
-		//var category = _.find(response, {id: $scope.categoryId});
-		//$scope.categoryTitle = category.title;
-		//$scope.category_sources = category.feed_sources;
-		$scope.venue = response[categoryId];
-		$scope.events = response.arrayEvents;
-		if ($scope.venue !== null) {
-			var specials = $scope.venue.arraySpecials;
-			for (var key in specials) {
-				var special = specials[key];
-				for (var day in special) {
-					$scope.specials[day] = special[day];
-				}
-			}
+	VenueService.getOne(categoryId).then(
+		function(result) {
+			$scope.venue = result;
+			$scope.events = result.getEvents();
+		}, 
+		function(reason) {
+			console.log("Error: Could not fetch details, reason: " + reason);
 		}
-	});
+	);
 })
 
 //this method brings posts for a source provider

@@ -3,20 +3,21 @@
     <span>Maps</span>
   </ion-nav-title>
   <ion-content scroll="false">
-    <div class="mapWrap"  data-tap-disabled="true">
-      <div id="iw-container" gm-info-window="infoWindow" mapDetails>
-
-        <div class="iw-title"></div>
-          <h4>{{selectedVenue.strName}}</h4>
-          {{selectedVenue.intDistance}} Miles
-
+    <div class="mapWrap"  data-tap-disabled="true" ng-if="hasData">
+      <div id="iw-container" gm-info-window="infoWindow">
+          <div class="item-thumbnail-left"> 
+            <img class="glow-img" ng-src="{{selectedVenue.getLogo()}}">
+            <h3>{{selectedVenue.getName()}}</h3>
+            <p>{{selectedVenue.getAddress()}}</p>
+            <p>{{selectedVenue.getCity()}}, {{selectedVenue.getState()}}</p>
+          </div>
       </div>
-      <gm-map gm-map-id="'venues'" gm-center="center" gm-map-options="options" class="map" gm-zoom="zoom">
+      <gm-map gm-map-id="'venues'" gm-center="options.center" gm-map-options="options" class="map" gm-zoom="zoom">
     
         <gm-markers gm-objects="venues"
-                    gm-id="object.id"
-                    gm-position="{ lat: object.intLatitude, lng: object.intLongitude }"
-                    gm-marker-options="{ title: object.strName, clickable: true }"
+                    gm-id="object.getId()"
+                    gm-position="{ lat: object.getLatitude(), lng: object.getLongitude() }"
+                    gm-marker-options="{ title: object.getName(), clickable: true, icon: {url: 'img/marker.png'} }"
                     gm-events="markerEvents"
                     gm-on-openinfowindow="selectedVenue = object; infoWindow.open(marker.getMap(), marker);"
                     gm-on-click="triggerOpenInfoWindow(object)">
@@ -24,5 +25,6 @@
     
       </gm-map>
     </div>
+    <ion-spinner icon="spiral" ng-if="!hasData"></ion-spinner>    
   </ion-content>
 </ion-view>

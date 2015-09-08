@@ -1,5 +1,80 @@
 angular.module('your_app_name.factories', [])
 
+.factory('Venue', function() {
+  
+  function Venue(venueData) {
+    if (venueData) {
+      this.setData(venueData);
+    }
+  }
+
+  Venue.prototype = {
+
+    setData: function (venueData) {
+      angular.extend(this, venueData);
+    },
+
+    getId: function() {
+      return this.id;
+    },
+
+    getPhone: function() {
+      return this.strPhone;
+    },
+
+    getName: function() {
+      return this.strName;
+    },
+
+    getAddress: function() {
+      return this.strAddress;
+    },
+
+    getCity: function() {
+      return this.intCity;
+    },
+
+    getState: function() {
+      return this.strState;
+    },
+
+    getLogo: function() {
+      return this.strLogo;
+    },
+
+    getSpecialOffer: function(day) {
+      var specials = this.arraySpecials;
+      for (var i = 0; i < specials.length; i++) {
+        if (day in specials[i]) {
+          return specials[i][day];
+        }
+      }
+      return "";
+    },
+
+    getDistance: function() {
+      return this.intDistance;
+    },
+
+    getEvents: function() {
+      return this.arrayEvents;
+    },
+
+    getLatitude: function() {
+      return this.intLatitude;
+    },
+
+    getLongitude: function() {
+      return this.intLongitude;
+    },
+
+
+  };
+
+  return Venue;
+
+})
+
 .factory('FeedLoader', function ($resource){
   return $resource('http://barboapp.com/api/venues/30.258860/-97.748016/5', {}, {
     fetch: { method: 'JSONP', params: {v: '1.0', callback: 'JSON_CALLBACK'} }

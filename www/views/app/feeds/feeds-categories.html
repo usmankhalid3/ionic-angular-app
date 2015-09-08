@@ -9,14 +9,15 @@
     <img src="img/barbotext.svg" class="header-text"/>
   </ion-nav-title>
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="category in feeds_categories"
+    <ion-spinner icon="spiral" ng-if="!hasData"></ion-spinner>
+    <ion-list ng-if="hasData">
+      <ion-item ng-repeat="venue in venues"
             class="item-thumbnail-left item-icon-right feed"
-            ui-sref="app.category-feeds({categoryId: $index})">
-        <img class="glow-img" ng-src="{{category.strLogo}}">
-        <h2>{{category.strName}}</span></h2>
-        <p ng-bind-html="todays_specials(category.arraySpecials)"></p>
-        <p><small>{{category.intDistance}} Miles</small></p>
+            ui-sref="app.category-feeds({categoryId: venue.getId()})">
+        <img class="glow-img" ng-src="{{venue.getLogo()}}">
+        <h2>{{venue.getName()}}</span></h2>
+        <p ng-bind-html="todays_specials(venue)"></p>
+        <p><small>{{venue.getDistance()}} Miles</small></p>
         <i class="button button-icon fwd-button"></i>
       </ion-item>
     </ion-list>

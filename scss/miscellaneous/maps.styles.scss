@@ -2,23 +2,42 @@
 {
 	background-color: $content-bg !important;
 
-	.gm-style-iw {
-	   width: 350px !important;
-	   top: 0 !important;
-	   left: 0 !important;
-	   border-radius: 2px 2px 0 0;
-	}
-
 	[gm-info-window] {
 	  	display: none;
-	  	//background: url('../img/popup-bg.png') no-repeat;
-		//background-size: contains;
-		//width: 50%;
-		//height: 50%;
+	}
+
+	.glow-img {
+
+		max-width: 80px !important;
+
+		border: 1px solid #000;
+
+		// for glowing
+		-webkit-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		-moz-box-shadow: 0 0 20px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+		box-shadow: 0 0 30px #f0cd54, inset 0 0 20px rgba(255,255,255,1);
+
+		// for round edges
+		-webkit-border-radius: 20px;
+		-moz-border-radius: 20px;
+		border-radius: 5px;
+	}
+
+	.h3 {
+		font-size: 14px;
+	}
+
+	.spinner svg {
+		position: absolute;
+		left: 50%;
+		top: 200px;
+		width: 50px;
+		height: 50px;
 	}
 
 	.map [gm-info-window] {
 	  display: block;
+	  width: 280px;
 	}
 	 
 	.map {
