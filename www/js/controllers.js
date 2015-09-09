@@ -1,37 +1,100 @@
 angular.module('your_app_name.controllers', [])
 
-.controller('AuthCtrl', function($scope, $ionicConfig, OpenFB) {
+.controller('AuthCtrl', function($scope, $ionicConfig, $ionicLoading, $q, UserService, $state, FACEBOOK_APP_ID) {
 
- 	$scope.facebookLogin = function () {
+	//This is the success callback from the login method
+	var fbLoginSuccess = function(response) {
+		if (!response.authResponse){
+		  fbLoginError("Cannot find the authResponse");
+		  return;
+		}
+		console.log('fbLoginSuccess');
 
-		OpenFB.login('email,read_stream,publish_stream').then(
-            function () {
-                console.log("Logged in!");
-            },
-            function () {
-                alert('OpenFB login failed');
-			}
+		var authResponse = response.authResponse;
+
+		getFacebookProfileInfo(authResponse)
+			.then(function(profileInfo) {
+
+			  console.log('profile info success', profileInfo);
+			  //for the purpose of this example I will store user data on local storage
+			  UserService.setUser({
+			    authResponse : authResponse,
+			    profileInfo : profileInfo,
+			    picture : "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
+			  });
+
+			  $ionicLoading.hide();
+			  $state.go('app.feeds-categories');
+			}, function(fail){
+			  //fail get profile info
+			  console.log('profile info fail', fail);
+		});
+	};
+
+	//This is the fail callback from the login method
+	var fbLoginError = function(error){
+		console.log('fbLoginError');
+		$ionicLoading.hide();
+	};
+
+	//this method is to get the user profile info from the facebook api
+	var getFacebookProfileInfo = function (authResponse) {
+		var info = $q.defer();
+
+		facebookConnectPlugin.api('/me?fields=about,bio,birthday,email,name&access_token=' + authResponse.accessToken, null,
+		  function (response) {
+		    info.resolve(response);
+		  },
+		  function (response) {
+		    info.reject(response);
+		  }
 		);
-    };
+		return info.promise;
+	};
+
+	$scope.login = function() {
+	    if (!window.cordova) {
+	      //this is for browser only
+	      facebookConnectPlugin.browserInit(FACEBOOK_APP_ID);
+	    }
+
+	    facebookConnectPlugin.getLoginStatus(function(success){
+	     if(success.status === 'connected'){
+	        // the user is logged in and has authenticated your app, and response.authResponse supplies
+	        // the user's ID, a valid access token, a signed request, and the time the access token
+	        // and signed request each expire
+	        console.log('getLoginStatus',success.status);
+	        $state.go('app.feeds-categories');
+	     } else {
+	        //if (success.status === 'not_authorized') the user is logged in to Facebook, but has not authenticated your app
+	        //else The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
+	        console.log('getLoginStatus',success.status);
+	        $ionicLoading.show({
+	          template: 'Logging in...'
+	        });
+
+	        //ask the permissions you need. You can learn more about FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
+	        facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
+	      }
+	    });
+	};
 })
 
 // APP
-.controller('AppCtrl', function($scope, $ionicConfig, OpenFB) {
+.controller('AppCtrl', function($scope, $ionicConfig, UserService) {
+	$scope.user = UserService.getUser();
+	$scope.firstName = function() {
+		var name = $scope.user.profileInfo.name;
+		var end = name.indexOf(' ');
+		if (end < 0) {
+			end = name.length;
+		}
+		return name.substring(0, end);
+	};
+})
 
-	 $scope.logout = function () {
-            OpenFB.logout();
-            $state.go('app.login');
-     };
-
-    $scope.revokePermissions = function () {
-        OpenFB.revokePermissions().then(
-            function () {
-                $state.go('app.login');
-            },
-            function () {
-                alert('Revoke permissions failed');
-            });
-    };
+.controller('ProfileCtrl', function($scope, $ionicConfig, UserService) {
+	$scope.user = UserService.getUser();
 })
 
 //LOGIN
@@ -350,48 +413,40 @@ angular.module('your_app_name.controllers', [])
 })
 
 // SETTINGS
-.controller('SettingsCtrl', function($scope, $ionicActionSheet, $state) {
-	$scope.airplaneMode = true;
-	$scope.wifi = false;
-	$scope.bluetooth = true;
-	$scope.personalHotspot = true;
+.controller('SettingsCtrl', function($scope, $ionicActionSheet, $state, UserService, $ionicLoading, $ionicPopup, FACEBOOK_APP_ID) {
+	$scope.user = UserService.getUser();
+   // LOG OUT
+   // A confirm dialog to be displayed when the user wants to log out
+   $scope.showConfirmLogOut = function() {
+     var confirmPopup = $ionicPopup.confirm({
+       title: 'Log out',
+       template: 'Are you sure you want to log out?'
+     });
+     confirmPopup.then(function(res) {
+       if(res) {
+         //logout
+         $ionicLoading.show({
+           template: 'Logging out...'
+         });
 
-	$scope.checkOpt1 = true;
-	$scope.checkOpt2 = true;
-	$scope.checkOpt3 = false;
+         if (!window.cordova) {
+           //this is for browser only
+           facebookConnectPlugin.browserInit(FACEBOOK_APP_ID);
+         }
 
-	$scope.radioChoice = 'B';
-
-	// Triggered on a the logOut button click
-	$scope.showLogOutMenu = function() {
-
-		// Show the action sheet
-		var hideSheet = $ionicActionSheet.show({
-			//Here you can add some more buttons
-			// buttons: [
-			// { text: '<b>Share</b> This' },
-			// { text: 'Move' }
-			// ],
-			destructiveText: 'Logout',
-			titleText: 'Are you sure you want to logout? This app is awsome so I recommend you to stay.',
-			cancelText: 'Cancel',
-			cancel: function() {
-				// add cancel code..
-			},
-			buttonClicked: function(index) {
-				//Called when one of the non-destructive buttons is clicked,
-				//with the index of the button that was clicked and the button object.
-				//Return true to close the action sheet, or false to keep it opened.
-				return true;
-			},
-			destructiveButtonClicked: function(){
-				//Called when the destructive button is clicked.
-				//Return true to close the action sheet, or false to keep it opened.
-				$state.go('auth.walkthrough');
-			}
-		});
-
-	};
+         facebookConnectPlugin.logout(function(){
+           //success
+           $ionicLoading.hide();
+           $state.go('auth.walkthrough');
+         },
+         function(fail){
+           $ionicLoading.hide();
+         });
+       } else {
+        //cancel log out
+       }
+     });
+   };
 })
 
 // TINDER CARDS

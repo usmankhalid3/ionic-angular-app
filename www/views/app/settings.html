@@ -11,9 +11,9 @@
   <ion-content>
     <div class="text-center">
       <br>
-      <img class="glow-img" src="../img/luke.png" width="100" />
+      <img class="glow-img" src="{{user.picture}}" width="100" />
       <br>
-      <h3 class="settings-name">Luke Patterson</h3>
+      <h3 class="settings-name">{{user.profileInfo.name}}</h3>
       <span style="color:white">Austin, TX</span>
     </div>
 
@@ -36,8 +36,8 @@
         <img alt="" src="img/instagram.png"/>
         <img alt="" src="img/twitter.png"/>
       </div>
-      <div ui-sref="" class="btn-invite-fb"></div>
-      <div ui-sref="" class="btn-signout" ng-click="showLogOutMenu()"></div>
+      <div class="btn-invite-fb"></div>
+      <div class="btn-signout" ng-click="showConfirmLogOut()"></div>
     </div>
   </ion-content>
 </ion-view>

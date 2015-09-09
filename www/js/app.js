@@ -25,14 +25,20 @@ angular.module('your_app_name', [
   'ionic.contrib.ui.tinderCards',
   'youtube-embed',
   'AngularGM',
-  'openfb',
 ])
 
-.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout, APP_ID, OpenFB) {
-
-  OpenFB.init(APP_ID, "http://localhost:8100/#/feeds-categories");
+.run(function($ionicPlatform, PushNotificationsService, $rootScope, $ionicConfig, $timeout, UserService) {
 
   $ionicPlatform.on("deviceready", function(){
+
+    facebookConnectPlugin.getLoginStatus(function(success){
+      if((success.status === 'connected') && (UserService.userIsLoggedIn() === true)){
+        $state.go('app.feeds-categories');
+      }else{
+        $state.go('auth.walkthrough');
+      }
+    });
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -45,8 +51,28 @@ angular.module('your_app_name', [
     PushNotificationsService.register();
   });
 
+  $ionicPlatform.on("resume", function(){
+    facebookConnectPlugin.getLoginStatus(function(success){
+      if((success.status != 'connected') || (UserService.userIsLoggedIn() === false)){
+        $state.go('auth.walkthrough');
+      }
+    });
+  });
+
   // This fixes transitions for transparent background views
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+    facebookConnectPlugin.getLoginStatus(function(success){
+        if((success.status === 'connected') && (UserService.userIsLoggedIn() === true)){
+            //go ahead
+        }
+        else {
+          event.preventDefault();
+          $state.go('auth.walkthrough');
+        }
+      },
+      function(fail){
+      });
+
     if(toState.name.indexOf('auth.walkthrough') > -1)
     {
       // set transitions to android to avoid weird visual effect in the walkthrough transitions
@@ -264,7 +290,8 @@ angular.module('your_app_name', [
     url: "/profile",
     views: {
       'menuContent': {
-        templateUrl: "views/app/profile.html"
+        templateUrl: "views/app/profile.html",
+        controller: 'ProfileCtrl'
       }
     }
   })

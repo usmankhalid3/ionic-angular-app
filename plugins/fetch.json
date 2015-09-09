@@ -34,5 +34,16 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.phonegap.plugins.facebookconnect": {
+        "source": {
+            "type": "local",
+            "path": "/Users/usman/Desktop/Personal/Work/phonegap-facebook-plugin"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "893523344068067",
+            "APP_NAME": "ionfullapp"
+        }
     }
 }

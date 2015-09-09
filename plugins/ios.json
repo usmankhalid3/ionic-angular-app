@@ -5,8 +5,82 @@
     },
     "config_munge": {
         "files": {
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FacebookConnectPlugin\"><param name=\"ios-package\" value=\"FacebookConnectPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<plugin name=\"FacebookConnectPlugin\" value=\"FacebookConnectPlugin\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://m.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://graph.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://api.facebook.com\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.fbcdn.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<access origin=\"https://*.akamaihd.net\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
             "framework": {
                 "parents": {
+                    "libsqlite3.dylib": [
+                        {
+                            "xml": false,
+                            "count": 1
+                        }
+                    ],
+                    "Social.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
+                        }
+                    ],
+                    "Accounts.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
+                        }
+                    ],
+                    "Security.framework": [
+                        {
+                            "xml": true,
+                            "count": 1
+                        }
+                    ],
                     "MessageUI.framework": [
                         {
                             "xml": true,
@@ -15,23 +89,23 @@
                     ]
                 }
             },
-            "config.xml": {
+            "*-Info.plist": {
                 "parents": {
-                    "/*": [
+                    "FacebookAppID": [
                         {
-                            "xml": "<feature name=\"EmailComposer\"><param name=\"ios-package\" value=\"APPEmailComposer\" /></feature>",
+                            "xml": "<string>893523344068067</string>",
                             "count": 1
-                        },
+                        }
+                    ],
+                    "FacebookDisplayName": [
                         {
-                            "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
+                            "xml": "<string>ionfullapp</string>",
                             "count": 1
-                        },
+                        }
+                    ],
+                    "CFBundleURLTypes": [
                         {
-                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
+                            "xml": "<array><dict><key>CFBundleURLSchemes</key><array><string>fb893523344068067</string></array></dict></array>",
                             "count": 1
                         }
                     ]
@@ -40,16 +114,21 @@
         }
     },
     "installed_plugins": {
-        "de.appplant.cordova.plugin.email-composer": {
-            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
-        },
-        "com.synconset.imagepicker": {
+        "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
         "com.phonegap.plugins.PushPlugin": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         },
-        "com.ionic.keyboard": {
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "893523344068067",
+            "APP_NAME": "ionfullapp",
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.startapplabs.ionFullApp"
+        },
+        "de.appplant.cordova.plugin.email-composer": {
             "PACKAGE_NAME": "com.startapplabs.ionFullApp"
         }
     },
