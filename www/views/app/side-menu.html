@@ -23,33 +23,40 @@
           <h2 class="greeting">Hi {{firstName()}}</h2>
           <p class="message">Welcome back</p>
         </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.bookmarks">
-          <i class="icon ion-bookmark"></i>
-          <h2 class="menu-text">Saved for later</h2>
-        </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.feeds-categories">
-          <i class="icon ion-radio-waves"></i>
-          <h2 class="menu-text">Feeds</h2>
+          <i class="icon ion-clipboard"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Venue List</h2>
+        </ion-item>        
+        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.maps">
+          <i class="icon ion-android-globe"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Venue Map</h2>
         </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.wordpress">
-          <i class="icon ion-social-wordpress"></i>
-          <h2 class="menu-text">Wordpress</h2>
+        <ion-item class="item-icon-left" nav-clear menu-close href="">
+          <i class="icon ion-heart"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Favorites</h2>
         </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.layouts">
-          <i class="icon ion-wand"></i>
-          <h2 class="menu-text">Layouts</h2>
-        </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.miscellaneous">
-          <i class="icon ion-asterisk"></i>
-          <h2 class="menu-text">Miscellaneous</h2>
-        </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.forms">
-          <i class="icon ion-document"></i>
-          <h2 class="menu-text">Forms</h2>
+        <ion-item class="item-icon-left" nav-clear menu-close href="">
+          <i class="icon ion-paper-airplane"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Contact</h2>
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close ui-sref="app.settings">
-          <i class="icon ion-gear-a"></i>
-          <h2 class="menu-text">Settings</h2>
+          <i class="icon ion-android-settings"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Settings</h2>
+        </ion-item>
+        <ion-item>
+          <h2>Follow us</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="" ng-click="openUrl('http://www.facebook.com/barboapp');">
+          <i class="icon ion-social-facebook"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Facebook</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="" ng-click="openUrl('http://www.twitter.com/barboapp');">
+          <i class="icon ion-social-twitter"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Twitter</h2>
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="" ng-click="openUrl('http://www.instagram.com/barboapp');">
+          <i class="icon ion-social-instagram"></i>
+          <h2 class="menu-text" style="font-family:'Lobster_1_4';">Instagram</h2>
         </ion-item>
 
     </ion-list>

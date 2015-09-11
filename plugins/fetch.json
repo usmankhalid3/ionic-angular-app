@@ -45,5 +45,13 @@
             "APP_ID": "893523344068067",
             "APP_NAME": "ionfullapp"
         }
+    },
+    "cordova-plugin-inappbrowser": {
+        "source": {
+            "type": "local",
+            "path": "../cordova-plugin-inappbrowser"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

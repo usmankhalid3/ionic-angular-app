@@ -4,7 +4,7 @@
   </ion-nav-title>
   <ion-content scroll="false">
     <div class="mapWrap"  data-tap-disabled="true" ng-if="hasData">
-      <div id="iw-container" gm-info-window="infoWindow">
+      <div id="iw-container" gm-info-window="infoWindow" ng-click="showDetails(selectedVenue)">
           <div class="item-thumbnail-left"> 
             <img class="glow-img" ng-src="{{selectedVenue.getLogo()}}">
             <h3>{{selectedVenue.getName()}}</h3>

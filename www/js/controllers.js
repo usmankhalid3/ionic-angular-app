@@ -91,6 +91,10 @@ angular.module('your_app_name.controllers', [])
 		}
 		return name.substring(0, end);
 	};
+
+	$scope.openUrl = function(url) {
+		window.open(url, '_system', 'location=no');
+	};
 })
 
 .controller('ProfileCtrl', function($scope, $ionicConfig, UserService) {
@@ -166,7 +170,7 @@ angular.module('your_app_name.controllers', [])
 	};
 })
 
-.controller('MapsCtrl', function($scope, $ionicLoading, $http, VenueService) {
+.controller('MapsCtrl', function($scope, $ionicLoading, $http, VenueService, $state) {
 
 	$scope.venues = [];
 	$scope.hasData = false;
@@ -174,6 +178,10 @@ angular.module('your_app_name.controllers', [])
 	$scope.options = {
 		center: new google.maps.LatLng(0, 0),
 		zoom: 15,
+	};
+
+	$scope.showDetails = function(selectedVenue) {
+		$state.go("app.category-feeds", {categoryId: selectedVenue.getId()});
 	};
 
 	$scope.triggerOpenInfoWindow = function(venue) {
