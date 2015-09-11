@@ -11,18 +11,26 @@
 .settings-view
 {
 
+	.settings-container {
+		margin: auto;
+		width: 100%;
+
+	}
+
 	.logout-option
 	{
 		text-align: center;
 	}
 
 	.signup-form {
-		position: absolute;
-		left: 15%;
-		width: 100%;
 
 		input {
+
+			float: none;
+			display: inline;
+
 			width: 70%;
+
 			border: 1px solid #000000;
 			/* round the corners */
 			-webkit-border-radius: 4px;
@@ -35,8 +43,17 @@
 			box-shadow: 0px 0px 10px #9ee5de;
 		}
 		
-		label {
+		.labels {
+			position: absolute;
+			left: 16% !important;
 		    color: #fff;
+		}
+
+		.remember-me {
+			color: #fff;
+			input {
+				width: auto;
+			}
 		}
 	}
 
@@ -55,33 +72,20 @@
 		border-radius: 5px;
 	}
 
-
-	.remember-me {
-		position: absolute;
-		left: 15%;
-		top: 100%;
-		input {
-			width: auto;
-		}
-	}
-
 	.settings-name {
 		font-family: "Lobster_1_4";
 		color: white;
-		margin-top: 10px;
+		padding-top: 10px;
 	}
 
 	.follow {
 		@extend .settings-name;
-		position: absolute;
-		left: 25%;
-		top: 190%;
+		position: relative;
+		margin-top: 10px;
+		font-size: 25px;
 	}
 
 	.social-row {
-		position: absolute;
-		top: 215%;
-		width: 100%;
 
 		img {
 			height: 30px;
@@ -89,37 +93,30 @@
 		}
 	}
 
-	.btn-img {
-		position: absolute;
-		width: 100%;
-	}
-
 	.btn-invite-fb {
-		@extend .btn-img;
-		left: 23%;
-		top: 240%;
-		height: 25%;
 		background: url('../img/invite-fb.png') no-repeat;
-		background-size: contain;
+		background-size: cover;
+		width: 190px;
+		height: 40px;
+		margin: 0 auto;
 	}
 
 	.btn-invite-fb:active {
 		background: url('../img/invite-fb-active.png') no-repeat;
-		background-size: contain;
+		background-size: cover;
 	}
 
 	.btn-signout {
-		@extend .btn-img;
-		left: 35%;
-		top: 273%;
-		height: 16%;		
 		background: url('../img/signout.png') no-repeat;
-		background-size: contain;
+		background-size: cover;
+		width: 120px;
+		height: 30px;
+		margin: 0 auto;
 	}
 
 	.btn-signout:active {
 		background: url('../img/signout.png') no-repeat;
-		background-size: contain;
+		background-size: cover;
 	}
 
 	background-color: darken($dark, 70%) !important;

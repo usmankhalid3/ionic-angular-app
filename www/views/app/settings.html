@@ -9,35 +9,47 @@
     <img src="img/barbotext.svg" class="header-text"/>
   </ion-nav-title>
   <ion-content>
-    <div class="text-center">
-      <br>
-      <img class="glow-img" src="{{user.picture}}" width="100" />
-      <br>
-      <h3 class="settings-name">{{user.profileInfo.name}}</h3>
-      <span style="color:white">Austin, TX</span>
+    <div class="row">
+      <div class="settings-container text-center">
+        <img class="glow-img" src="{{user.picture}}" width="100" style="display: inline; float: none; margin-top: 10px;"/>
+        <h3 class="settings-name">{{user.profileInfo.name}}</h3>
+        <span style="color:white">Austin, TX</span>
+      </div>
     </div>
 
-    <form class="signup-form">
-      <label>Email</label>
-      <input type="text">
-      <br>
-      <label>Password</label>
-      <input type="password">
-      <br>
-      <label class="remember-me">
-        <input type="checkbox" />
-        Remember me on Login
-      </label>
-    </form>
-    <div class="text-center">
-      <h3 class="follow">Like and Follow us on:</h3>
-      <div class="social-row">
-        <img alt="" src="img/facebook-logo.png" class="fb"/>
-        <img alt="" src="img/instagram.png"/>
-        <img alt="" src="img/twitter.png"/>
+    <div class="row">
+      <div class="settings-container signup-form text-center">
+        <label class="labels">Email</label>
+        <br>
+        <input type="text">
+        <br>
+        <br>
+        <label class="labels">Password</label>
+        <br>
+        <input type="password">
+        <br>
+        <br>
+        <label class="remember-me">
+          <input type="checkbox" />
+          Remember me on Login
+        </label>
       </div>
-      <div class="btn-invite-fb"></div>
-      <div class="btn-signout" ng-click="showConfirmLogOut()"></div>
+    </div>
+    <div class="row">
+      <div class="settings-container text-center">
+        <div class="follow">Like and Follow us on:</div>
+        <br>
+        <div class="social-row">
+          <img alt="" src="img/facebook-logo.png"/>
+          <img alt="" src="img/instagram.png"/>
+          <img alt="" src="img/twitter.png"/>
+          <br>
+          <br>
+          <div class="btn-invite-fb"></div>
+          <br>
+          <div class="btn-signout" ng-click="showConfirmLogOut()"></div>
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
