@@ -1,16 +1,40 @@
 <ion-view class="walkthrough-view" cache-view="false">
   <ion-content scroll="false">
     <div class="page-content">
-      <img ng-src="img/barbotextbelow.svg" class="logo"/>
-      <div class="btn-facebook" ng-click="login()"/>
-      <div class="login-form">
-        <label class="uname-label">Email</label>
-        <input type="email" placeholder="Email" class="uname-field"/>
-        <label class="pwd-label">Password</label>
-        <input type="password" placeholder="Password" class="pwd-field"/>
-        <a ui-sref="app.feeds-categories" class="btn-signin"/>
-        <a ui-sref="auth.signup" class="btn-register"/>
-        <a ui-sref="auth.forgot-password" class="forgot-pwd">Forgot Password?</a>
+      <div class="row">
+        <div class="content-container text-center">
+          <img ng-src="img/barbotextbelow.svg" class="logo"/>
+          <br>
+          <br>
+          <div class="btn-facebook" ng-click="login();"></div>
+          <br>
+          <br>
+          <div class="login-form">
+            <label class="labels">Email</label>
+            <br>
+            <input type="text">
+            <br>
+            <br>
+            <label class="labels">Password</label>
+            <br>
+            <input type="password">
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn-container col">
+            <div class="btn-signin" ui-sref="app.feeds-categories"></div>
+        </div>
+        <div class="btn-container col">
+            <div class="btn-register" ui-sref="auth.signup"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="content-container">
+          <div ui-sref="auth.forgot-password" class="forgot-pwd">Forgot Password?</div>
+        </div>
       </div>
     </div>
   </ion-content>

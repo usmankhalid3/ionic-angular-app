@@ -2,64 +2,40 @@
 {
 	.page-content {
 
-		.logo {
-			//box-shadow: 3px 5px 3.8px 0.2px #000000;
-			position: absolute;
-			width: 40%;
-			height: 40%;
-  			left: 33%;
-			top: 3%;
-		}
+		.content-container {
+			margin: auto;
+			width: 100%;
 
-		.btn-facebook {
-			position: absolute;
-			left: 8%;
-			top: 42%;
-			width: 85%;
-			height: 22%;
-			background: url('../img/btn-facebook.png') no-repeat;
-			background-size: contain;
-		}
+			.logo {
+				width: auto;
+				height: 250px;
+				margin-top: 10px;
+			}
 
-		.btn-facebook:active {
-			background: url('../img/btn-facebook-active.png') no-repeat;
-			background-size: contain;
+			.btn-facebook {
+				margin: 0 auto;
+				width: 330px;
+				height: 100px;
+				background: url('../img/btn-facebook.png') no-repeat;
+				background-size: cover;
+			}
+
+			.btn-facebook:active {
+				background: url('../img/btn-facebook-active.png') no-repeat;
+				background-size: cover;
+			}
 		}
 
 		.login-form {
 
-			height: 100%;
+			input {
 
-			.separator {
-				background: url('../img/login-backend.png') no-repeat;
-				background-size: contain;
-				position: absolute;
-				left: 0%;
-				top: 50%;
-				width: 100%;
-				height: 100%;
-				z-index: -1;
-			}
+				float: none;
+				display: inline;
 
-			.form-content {
-				position: absolute;
-				left: 13%;
-			}
+				width: 70%;
 
-			.label {
-				@extend .form-content;
-				width: 25%;
-				height: 1.8%;
-				color: #ddd;
-				font-size: 15px;
-			}
-
-			.input-field {
-				@extend .form-content;
-				height: 20%;
-				width: 85%;
 				border: 1px solid #000000;
-
 				/* round the corners */
 				-webkit-border-radius: 4px;
 				-moz-border-radius: 4px;
@@ -70,67 +46,53 @@
 				-moz-box-shadow: 0px 0px 10px #9ee5de;
 				box-shadow: 0px 0px 10px #9ee5de;
 			}
-
-			.uname-label {
-				@extend .label;
-				top: 103%;
-			}
-
-			.pwd-label {
-				@extend .label;
-				top: 148%;
-			}
 			
-			.uname-field {
-				@extend .input-field;
-				top: 118%;
-			}
-
-			.pwd-field {
-				@extend .input-field;
-				top: 164%;
-			}
-
-			.btn-img {
+			.labels {
 				position: absolute;
-				top: 200%;
-				width: 50%;
-				height: 25%;
+				left: 16% !important;
+			    color: #fff;
 			}
+		}
+
+		.btn-container {
+			margin: auto;
+			width: 100%;
 
 			.btn-signin {
-				@extend .btn-img;
-				left: 13%;
+				margin: 0 auto;
 				background: url('../img/signin.png') no-repeat;
-				background-size: contain;
+				background-size: cover;
+				width: 135px;
+				height: 35px;
+				float: right;
 			}
 
 			.btn-signin:active {
 				background: url('../img/signin-active.png') no-repeat;
-				background-size: contain;
+				background-size: cover;
 			}
 
 			.btn-register {
-				@extend .btn-img;
-				left: 58%;
+				float: left;
+				margin: 0 auto;
 				background: url('../img/register.png') no-repeat;
-				background-size: contain;
+				background-size: cover;
+				width: 135px;
+				height: 35px;
 			}
 
 			.btn-register:active {
 				background: url('../img/register-active.png') no-repeat;
-				background-size: contain;
+				background-size: cover;
 			}
+		}
 
-			.forgot-pwd {
-				position: absolute;
-				width: 50%;
-				right: -18%;
-				top: 230%;
-				color: #ddd;
-				font-size: 12px;
-				text-decoration: none;
-			}
+		.forgot-pwd {
+			color: #fff;
+			text-align: right;
+			padding-right: 57px;
+			font-size: 12px;
+			text-decoration: none;
 		}
 	}
 
